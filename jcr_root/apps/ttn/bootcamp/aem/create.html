@@ -1,0 +1,55 @@
+<html>
+<head>
+    <title>Coffee Shop</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+            crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <!--     Latest compiled and minified JavaScript -->
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+</head>
+<body  data-sly-use.model="ModelBean">
+<div data-sly-include="header.html"></div>
+<div class="container">
+<form method="POST" action="order/records/${model.currentOrder}" enctype="multipart/form-data">
+    <input type="hidden" name=":order" value="first"/>
+    <input type="hidden" name=":redirect" value="/content/ttn/order/records/${model.currentOrder}.show.html"/>
+    <input type="hidden" name="title" value="${model.currentOrder}"/>
+    <input type="hidden" name="status" value="Pending"/>
+    <input type="hidden" name="sling:resourceType" value="ttn/bootcamp/aem"/>
+    <table class="table table-bordered">
+        <tr class="row">
+            <td colspan="2"><h1>Create an Order</h1></td>
+        </tr>
+        <tr class="row">
+            <td>Item</td>
+            <td><select name="item">
+                <sly data-sly-list="${model.drinkTypeList}">
+            	<option value="${item.name}">${item.name}</option>
+                </sly>
+            </select></td>
+        </tr>
+        <tr class="row">
+            <td>Quantity</td>
+            <td>
+                <input type="text" name="quantity" value="1"/>
+                <input type="hidden" name="quantity@TypeHint" value="Long"/>
+                <input type="hidden" name="quantity@DefaultValue" value="1"/>
+            </td>
+        </tr>
+        <tr class="row">
+            <td colspan="2"><input type="submit" value="submit"/></td>
+        </tr>
+    </table>
+</form>
+</div>
+<div data-sly-include="footer.html"></div>
+</body>
+</html>
